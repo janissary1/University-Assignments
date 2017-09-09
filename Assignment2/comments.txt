@@ -1,0 +1,4 @@
+Regarding reading from files: I assumed that the images are in the folder as given to us and are being tested as such and not just in the src folder (Im not using an ide). If you are testing with the images in the same folder as the feedforward.class, then please change line 26 :
+BufferedImage img = ImageIO.read(new File("numbers/" + name));
+
+“numbers/“ -> “src/“
