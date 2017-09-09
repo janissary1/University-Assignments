@@ -1,0 +1,33 @@
+This program Decrypts a file by reversing the encryption method described in the assignment.
+
+Methods:
+-fileReader
+-revSubstitution
+-stringDecryption
+-fileWriter
+-subPattern
+-columnOrder
+
+Each method is required to Decrypt the file.
+
+
+fileReader:
+
+Takes a String argument representing the file name to be Decrypted. The file is then read in using scanner line by line, added into a single string while removing commas and periods and adding a certain number of “|” characters in order to allow the resulting String’s length to be divided into 64 character chunks.
+
+subPattern:
+
+Takes a String argument representing the key used to Decrypt the file. Returns a substitution pattern StringBuffer using the hashcode of this key, through switching two random characters in a specific pattern over 100 iterations.
+
+columnOrder:
+
+Takes a String argument representing the key used to Decrypt the file. Returns a columnOrder representing the order of which you read the columns of an 8x8 transpose, through switching two integers in a 0-7 integer array in a specific pattern over 100 iterations.
+
+revSubstitution:
+
+Takes a String argument representing the reverse-Transposed String that needs to undergo reverse-Substitution and a StringBuffer argument representing the substitution pattern used to decrypt the reverse-Transposed String. This method iterates 27 times (one time for each character in the alphabet+” “) replacing the character at the index of alphabet in the string, with the character at the same index in the substitution pattern Returns a String. Since the output is always in uppercase we can use .lowercase() instead of a temp variable during the substitution.
+
+stringDecryption:
+
+This method covers the reverse-Transposition step in the decryption. It takes a String argument, representing the file contents, and a String argument representing the key. In the fileReader method we have added characters to the end in order to divide the file into 64 character chunks. The stringDecryption method begins by iterating over the number of chunks (the length of the file divided by 64). For each 64 character chunk we must create a grid and read it using the column order. Therefore in the first line of the for loop we take the first 64 character chunk from the file contents, and reassign the file to the remaining characters (deleting the first 64). We define a length 8 String array and in a nested for loop we further break up these 64 characters into eight character Strings and add them to the array at the position specified by the columnOrder. At this point we have the grid shown towards the end of the assignment. The next task is to read this grid from its ‘rows’ left to right. Therefore we make a for loop with another nested for loop. Both iterate over the range 0-7 the first for loop defines the position in the 2-d array(the row) while the second one defines the position of the character in the row. These nested loops setup iterates over the position of each character in each row. We remove the extra characters and then add the string to a StringBuffer. Since the output is in 64 character lines, we add an escape character “\n” at the end of each 64 character chunk. We remove all the extra characters from the StringBuffer at an index calculated using the number of difference of 64 and the number of 64 chunks minus 1 multiplied by 64 and adding the number of extra characters and the number of escape characters. Finally we typecast the StringBuffer object into a String and then invoke the revSubstitution method on it, which will give us the Decrypted string.
+
